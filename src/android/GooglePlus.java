@@ -69,7 +69,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
     public static final int KAssumeStaleTokenSec = 60;
 
     // Wraps our service connection to Google Play services and provides access to the users sign in state and Google APIs
-    private GoogleApiClient mGoogleApiClient;
+    //private GoogleApiClient mGoogleApiClient;
     private GoogleSignInClient mGoogleSignInClient;
     private CallbackContext savedCallbackContext;
 
@@ -132,9 +132,11 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
 
         //If options have been passed in, they could be different, so force a rebuild of the client
         // disconnect old client iff it exists
-        if (this.mGoogleApiClient != null) this.mGoogleApiClient.disconnect();
+        //if (this.mGoogleApiClient != null) this.mGoogleApiClient.disconnect();
+        if (this.mGoogleSignInClient != null) this.mGoogleSignInClient.signOut();
         // nullify
-        this.mGoogleApiClient = null;
+        //this.mGoogleApiClient = null;
+        this.mGoogleSignInClient = null;
 
         Log.i(TAG, "Building Google options");
 
@@ -196,7 +198,8 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
      * Starts the sign in flow with a new Intent, which should respond to our activity listener here.
      */
     private void signIn() {
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(this.mGoogleApiClient);
+        //Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(this.mGoogleApiClient);
+        Intent signInIntent = this.mGoogleSignInClient.getSignInIntent();
         cordova.getActivity().startActivityForResult(signInIntent, RC_GOOGLEPLUS);
     }
 
@@ -204,18 +207,19 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
      * Tries to log the user in silently using existing sign in result information
      */
     private void trySilentLogin() {
-        ConnectionResult apiConnect =  mGoogleApiClient.blockingConnect();
+        /*ConnectionResult apiConnect =  mGoogleApiClient.blockingConnect();
 
         if (apiConnect.isSuccess()) {
             handleSignInResult(Auth.GoogleSignInApi.silentSignIn(this.mGoogleApiClient).await());
-        }
+        }*/
+        this.mGoogleSignInClient.silentSignIn();
     }
 
     /**
      * Signs the user out from the client
      */
     private void signOut() {
-        if (this.mGoogleApiClient == null) {
+        /*if (this.mGoogleApiClient == null) {
             savedCallbackContext.error("Please use login or trySilentLogin before logging out");
             return;
         }
@@ -223,7 +227,8 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
         ConnectionResult apiConnect = mGoogleApiClient.blockingConnect();
 
         if (apiConnect.isSuccess()) {
-            Auth.GoogleSignInApi.signOut(this.mGoogleApiClient).setResultCallback(
+            Auth.GoogleSignInApi.signOut(this.mGoogleApiClient).setResultCallback(*/
+            this.mGoogleSignInClient.signOut().setResultCallback(
                     new ResultCallback<Status>() {
                         @Override
                         public void onResult(Status status) {
@@ -236,14 +241,14 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
                         }
                     }
             );
-        }
+        //}
     }
 
     /**
      * Disconnects the user and revokes access
      */
     private void disconnect() {
-        if (this.mGoogleApiClient == null) {
+        /*if (this.mGoogleApiClient == null) {
             savedCallbackContext.error("Please use login or trySilentLogin before disconnecting");
             return;
         }
@@ -251,7 +256,8 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
         ConnectionResult apiConnect = mGoogleApiClient.blockingConnect();
 
         if (apiConnect.isSuccess()) {
-            Auth.GoogleSignInApi.revokeAccess(this.mGoogleApiClient).setResultCallback(
+            Auth.GoogleSignInApi.revokeAccess(this.mGoogleApiClient).setResultCallback(*/
+            this.mGoogleSignInClient.revokeAccess().setResultCallback(
                     new ResultCallback<Status>() {
                         @Override
                         public void onResult(Status status) {
@@ -263,7 +269,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
                         }
                     }
             );
-        }
+        //}
     }
 
     /**
@@ -321,7 +327,8 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
      * @param signInResult - the GoogleSignInResult object retrieved in the onActivityResult method.
      */
     private void handleSignInResult(final GoogleSignInResult signInResult) {
-        if (this.mGoogleApiClient == null) {
+        //if (this.mGoogleApiClient == null) {
+        if (this.mGoogleSignInClient == null) {
             savedCallbackContext.error("GoogleApiClient was never initialized");
             return;
         }
