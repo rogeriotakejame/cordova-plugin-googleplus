@@ -69,6 +69,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
 
     // Wraps our service connection to Google Play services and provides access to the users sign in state and Google APIs
     private GoogleApiClient mGoogleApiClient;
+    private GoogleSignInClient mGoogleSignInClient;
     private CallbackContext savedCallbackContext;
 
     @Override
@@ -183,7 +184,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
             .addApi(Auth.GOOGLE_SIGN_IN_API, gso.build());
 
         this.mGoogleApiClient = builder.build();*/
-        this.mGoogleApiClient = GoogleSignIn.getClient(cordova.getActivity(),gso.build());
+        this.mGoogleSignInClient = GoogleSignIn.getClient(cordova.getActivity(),gso.build());
         Log.i(TAG, "GoogleApiClient built");
     }
 
