@@ -139,26 +139,26 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
         GoogleSignInOptions.Builder gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN);
 
         // request the default scopes
-        gso.requestEmail().requestProfile();
+        //gso.requestEmail().requestProfile();
 
         // We're building the scopes on the Options object instead of the API Client
         // b/c of what was said under the "addScope" method here:
         // https://developers.google.com/android/reference/com/google/android/gms/common/api/GoogleApiClient.Builder.html#public-methods
-        String scopes = clientOptions.optString(ARGUMENT_SCOPES, null);
+        /*String scopes = clientOptions.optString(ARGUMENT_SCOPES, null);
 
         if (scopes != null && !scopes.isEmpty()) {
             // We have a string of scopes passed in. Split by space and request
             for (String scope : scopes.split(" ")) {
                 gso.requestScopes(new Scope(scope));
             }
-        }
+        }*/
 
         // Try to get web client id
         String webClientId = clientOptions.optString(ARGUMENT_WEB_CLIENT_ID, null);
 
         // if webClientId included, we'll request an idToken
         if (webClientId != null && !webClientId.isEmpty()) {
-            gso.requestIdToken(webClientId);
+            //gso.requestIdToken(webClientId);
 
             // if webClientId is included AND offline is true, we'll request the serverAuthCode
             if (clientOptions.optBoolean(ARGUMENT_OFFLINE_KEY, false)) {
@@ -167,12 +167,12 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
         }
 
         // Try to get hosted domain
-        String hostedDomain = clientOptions.optString(ARGUMENT_HOSTED_DOMAIN, null);
+        /*String hostedDomain = clientOptions.optString(ARGUMENT_HOSTED_DOMAIN, null);
 
         // if hostedDomain included, we'll request a hosted domain account
         if (hostedDomain != null && !hostedDomain.isEmpty()) {
             gso.setHostedDomain(hostedDomain);
-        }
+        }*/
 
         //Now that we have our options, let's build our Client
         Log.i(TAG, "Building GoogleApiClient");
