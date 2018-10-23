@@ -177,12 +177,12 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
         //Now that we have our options, let's build our Client
         Log.i(TAG, "Building GoogleApiClient");
 
-        GoogleApiClient.Builder builder = new GoogleApiClient.Builder(webView.getContext())
+        /*GoogleApiClient.Builder builder = new GoogleApiClient.Builder(webView.getContext())
             .addOnConnectionFailedListener(this)
             .addApi(Auth.GOOGLE_SIGN_IN_API, gso.build());
 
-        this.mGoogleApiClient = builder.build();
-
+        this.mGoogleApiClient = builder.build();*/
+        this.mGoogleApiClient = GoogleSignIn.getClient(this,gso);
         Log.i(TAG, "GoogleApiClient built");
     }
 
