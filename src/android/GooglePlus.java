@@ -228,12 +228,15 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
 
         if (apiConnect.isSuccess()) {
             Auth.GoogleSignInApi.signOut(this.mGoogleApiClient).setResultCallback(*/
-            this.mGoogleSignInClient.signOut().setResultCallback(
-                    new ResultCallback<Status>() {
+            this.mGoogleSignInClient.signOut().addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    /*new ResultCallback<Status>() {
                         @Override
                         public void onResult(Status status) {
                             //on success, tell cordova
-                            if (status.isSuccess()) {
+                            if (status.isSuccess()) {*/
+                            if (task.isSuccessful()){
                                 savedCallbackContext.success("Logged user out");
                             } else {
                                 savedCallbackContext.error(status.getStatusCode());
@@ -257,14 +260,17 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
 
         if (apiConnect.isSuccess()) {
             Auth.GoogleSignInApi.revokeAccess(this.mGoogleApiClient).setResultCallback(*/
-            this.mGoogleSignInClient.revokeAccess().setResultCallback(
-                    new ResultCallback<Status>() {
+            this.mGoogleSignInClient.revokeAccess().addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    /*new ResultCallback<Status>() {
                         @Override
                         public void onResult(Status status) {
-                            if (status.isSuccess()) {
+                            if (status.isSuccess()) {*/
+                            if (task.isSuccessful()){
                                 savedCallbackContext.success("Disconnected user");
                             } else {
-                                savedCallbackContext.error(status.getStatusCode());
+                                    savedCallbackContext.error(status.getStatusCode());
                             }
                         }
                     }
