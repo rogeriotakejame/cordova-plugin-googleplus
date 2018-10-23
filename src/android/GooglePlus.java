@@ -136,7 +136,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
         Log.i(TAG, "Building Google options");
 
         // Make our SignIn Options builder.
-        GoogleSignInOptions.Builder gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN);
+        GoogleSignInOptions.Builder gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN);
 
         // request the default scopes
         gso.requestEmail().requestProfile();
