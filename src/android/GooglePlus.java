@@ -218,21 +218,21 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
         if (apiConnect.isSuccess()) {
             handleSignInResult(Auth.GoogleSignInApi.silentSignIn(this.mGoogleApiClient).await());
         }*/
-        Task<GoogleSignInAccount> task = this.mGoogleSignInClient.silentSignIn();
-        if(task.isSuccessful()){
-            GoogleSignInAccount signInAccount = task.getResult();
-            JSONObject result = new JSONObject();
-            try{
-                result.put("serverAuthCode", signInAccount.getServerAuthCode());
-                savedCallbackContext.success(result);
-            } catch (Exception e) {
-                savedCallbackContext.error("Trouble obtaining result, error: " + e.getMessage());
-            }
-        } else {
-            task.addOnCompleteListener(cordova.getActivity(), new OnCompleteListener<GoogleSignInAccount>() {
+        this.mGoogleSignInClient.silentSignIn()
+            .addOnCompleteListener(cordova.getActivity(), new OnCompleteListener<GoogleSignInAccount>() {
                 @Override
-                public void onComplete(Task<GoogleSignInAccount> task) {
-                    try {
+                public void onComplete(@NonNull Task<GoogleSignInAccount> task) {
+                    if(task.isSuccessful()){
+                        GoogleSignInAccount signInAccount = task.getResult();
+                        JSONObject result = new JSONObject();
+                        try{
+                            result.put("serverAuthCode", signInAccount.getServerAuthCode());
+                            savedCallbackContext.success(result);
+                        } catch (Exception e) {
+                            savedCallbackContext.error("Trouble obtaining result, error: " + e.getMessage());
+                        }
+                    }
+                    /*try {
                         GoogleSignInAccount signInAccount = task.getResult(ApiException.class);
                         JSONObject result = new JSONObject();
                         try{
@@ -243,7 +243,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
                         }
                     } catch (ApiException apiException) {
                         savedCallbackContext.error("Trouble obtaining api, error: " + apiException.getStatusCode());
-                    }
+                    }*/
                 }
             });
         }
