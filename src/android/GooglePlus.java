@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -229,8 +230,8 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
 
         if (apiConnect.isSuccess()) {
             Auth.GoogleSignInApi.signOut(this.mGoogleApiClient).setResultCallback(*/
-            this.mGoogleSignInClient.signOut();
-                /*.addOnCompleteListener(this, new OnCompleteListener<Void>() {
+            this.mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                     /*new ResultCallback<Status>() {
@@ -238,13 +239,13 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
                         public void onResult(Status status) {
                             //on success, tell cordova
                             if (status.isSuccess()) {*/
-                /*            if (task.isSuccessful()){
+                            if (task.isSuccessful()){
                                 savedCallbackContext.success("Logged user out");
                             } else {
                                 savedCallbackContext.error(status.getStatusCode());
                             }
                     }
-                });*/
+                });
         //}
     }
 
@@ -261,8 +262,8 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
 
         if (apiConnect.isSuccess()) {
             Auth.GoogleSignInApi.revokeAccess(this.mGoogleApiClient).setResultCallback(*/
-            this.mGoogleSignInClient.revokeAccess();
-                /*.addOnCompleteListener(this, new OnCompleteListener<Void>() {
+            this.mGoogleSignInClient.revokeAccess()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                     /*new ResultCallback<Status>() {
@@ -270,13 +271,13 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
                         public void onResult(Status status) {
                             //on success, tell cordova
                             if (status.isSuccess()) {*/
-               /*             if (task.isSuccessful()){
+                            if (task.isSuccessful()){
                                 savedCallbackContext.success("Disconnected user");
                             } else {
                                 savedCallbackContext.error(status.getStatusCode());
                             }
                     }
-                });*/
+                });
         //}
     }
 
