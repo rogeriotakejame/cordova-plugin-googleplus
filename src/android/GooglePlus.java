@@ -233,7 +233,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
         if (apiConnect.isSuccess()) {
             Auth.GoogleSignInApi.signOut(this.mGoogleApiClient).setResultCallback(*/
             this.mGoogleSignInClient.signOut()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                .addOnCompleteListener(cordova.getActivity(), new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                     /*new ResultCallback<Status>() {
@@ -265,7 +265,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
         if (apiConnect.isSuccess()) {
             Auth.GoogleSignInApi.revokeAccess(this.mGoogleApiClient).setResultCallback(*/
             this.mGoogleSignInClient.revokeAccess()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                .addOnCompleteListener(cordova.getActivity(), new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                     /*new ResultCallback<Status>() {
