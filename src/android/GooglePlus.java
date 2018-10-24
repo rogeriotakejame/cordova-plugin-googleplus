@@ -105,6 +105,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
             buildGoogleApiClient(args.optJSONObject(0));
 
             Log.i(TAG, "Trying to do silent login!");
+            cordova.setActivityResultCallback(this); //sets this class instance to be an activity result listener
             trySilentLogin();
 
         } else if (ACTION_LOGOUT.equals(action)) {
