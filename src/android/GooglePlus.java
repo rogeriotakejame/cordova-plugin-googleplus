@@ -205,6 +205,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
      */
     private void signIn() {
         //Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(this.mGoogleApiClient);
+        Log.i(TAG, "signIn");
         Intent signInIntent = this.mGoogleSignInClient.getSignInIntent();
         cordova.getActivity().startActivityForResult(signInIntent, RC_GOOGLEPLUS);
     }
@@ -239,6 +240,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
                             savedCallbackContext.error("Trouble obtaining api, error: " + apiException.getStatusCode());
                         }
                     } else {
+                        Log.i(TAG, "silentSignIn unsucessful");
                         signIn();
                     }
                     /*try {
