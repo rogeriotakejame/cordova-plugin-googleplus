@@ -246,7 +246,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
                     }*/
                 }
             });
-        }
+        
     }
 
     /**
