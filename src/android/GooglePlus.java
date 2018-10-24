@@ -364,7 +364,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
                     GoogleSignInAccount acct = signInResult.getSignInAccount();
                     JSONObject result = new JSONObject();
                     try {
-                        JSONObject accessTokenBundle = getAuthToken(
+                        /*JSONObject accessTokenBundle = getAuthToken(
                             cordova.getActivity(), acct.getAccount(), true
                         );
                         result.put(FIELD_ACCESS_TOKEN, accessTokenBundle.get(FIELD_ACCESS_TOKEN));
