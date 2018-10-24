@@ -146,7 +146,8 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
 
         // Make our SignIn Options builder.
         GoogleSignInOptions.Builder gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN);
-
+        String webClientId = clientOptions.optString(ARGUMENT_WEB_CLIENT_ID, null);
+        gso.requestServerAuthCode(webClientId, true);
         // request the default scopes
         //gso.requestEmail().requestProfile();
 
@@ -163,7 +164,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
         }*/
 
         // Try to get web client id
-        String webClientId = clientOptions.optString(ARGUMENT_WEB_CLIENT_ID, null);
+        /*String webClientId = clientOptions.optString(ARGUMENT_WEB_CLIENT_ID, null);
 
         // if webClientId included, we'll request an idToken
         if (webClientId != null && !webClientId.isEmpty()) {
@@ -173,7 +174,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
             if (clientOptions.optBoolean(ARGUMENT_OFFLINE_KEY, false)) {
                 gso.requestServerAuthCode(webClientId, true);
             }
-        }
+        }*/
 
         // Try to get hosted domain
         /*String hostedDomain = clientOptions.optString(ARGUMENT_HOSTED_DOMAIN, null);
@@ -363,18 +364,18 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
                     GoogleSignInAccount acct = signInResult.getSignInAccount();
                     JSONObject result = new JSONObject();
                     try {
-                        /*JSONObject accessTokenBundle = getAuthToken(
+                        JSONObject accessTokenBundle = getAuthToken(
                             cordova.getActivity(), acct.getAccount(), true
                         );
                         result.put(FIELD_ACCESS_TOKEN, accessTokenBundle.get(FIELD_ACCESS_TOKEN));
                         result.put(FIELD_TOKEN_EXPIRES, accessTokenBundle.get(FIELD_TOKEN_EXPIRES));
                         result.put(FIELD_TOKEN_EXPIRES_IN, accessTokenBundle.get(FIELD_TOKEN_EXPIRES_IN));
-                        result.put("email", acct.getEmail());
-                        result.put("idToken", acct.getIdToken());
+                        /*result.put("email", acct.getEmail());
+                        result.put("idToken", acct.getIdToken());*/
                         result.put("serverAuthCode", acct.getServerAuthCode());
-                        result.put("userId", acct.getId());*/
+                        /*result.put("userId", acct.getId());
                         result.put("displayName", acct.getDisplayName());
-                        /*result.put("familyName", acct.getFamilyName());
+                        result.put("familyName", acct.getFamilyName());
                         result.put("givenName", acct.getGivenName());
                         result.put("imageUrl", acct.getPhotoUrl());*/
                         savedCallbackContext.success(result);
