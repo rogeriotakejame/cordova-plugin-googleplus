@@ -218,8 +218,18 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
         if (apiConnect.isSuccess()) {
             handleSignInResult(Auth.GoogleSignInApi.silentSignIn(this.mGoogleApiClient).await());
         }*/
-        this.mGoogleSignInClient.silentSignIn()
-            .addOnCompleteListener(cordova.getActivity(), new OnCompleteListener<GoogleSignInAccount>() {
+        Task<GoogleSignInAccount> task = this.mGoogleSignInClient.silentSignIn();
+        if(task.isSuccessful()){
+            GoogleSignInAccount signInAccount = task.getResult();
+            JSONObject result = new JSONObject();
+            try{
+                result.put("serverAuthCode", signInAccount.getServerAuthCode());
+                savedCallbackContext.success(result);
+            } catch (Exception e) {
+                savedCallbackContext.error("Trouble obtaining result, error: " + e.getMessage());
+            }
+        } else {
+            task.addOnCompleteListener(cordova.getActivity(), new OnCompleteListener<GoogleSignInAccount>() {
                 @Override
                 public void onComplete(Task<GoogleSignInAccount> task) {
                     try {
@@ -236,6 +246,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
                     }
                 }
             });
+        }
     }
 
     /**
