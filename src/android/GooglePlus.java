@@ -222,7 +222,9 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
             .addOnCompleteListener(cordova.getActivity(), new OnCompleteListener<GoogleSignInAccount>() {
                 @Override
                 public void onComplete(@NonNull Task<GoogleSignInAccount> task) {
+                    Log.i(TAG, "silentSignIn complete");
                     if(task.isSuccessful()){
+                        Log.i(TAG, "silentSignIn sucessful");
                         try {
                             GoogleSignInAccount signInAccount = task.getResult(ApiException.class);
                             //GoogleSignInAccount signInAccount = task.getResult();
