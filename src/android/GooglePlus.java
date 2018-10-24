@@ -244,7 +244,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
                             if (task.isSuccessful()){
                                 savedCallbackContext.success("Logged user out");
                             } else {
-                                savedCallbackContext.error(task.getException());
+                                savedCallbackContext.error(task.getException().getMessage());
                             }
                     }
                 });
@@ -276,7 +276,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
                             if (task.isSuccessful()){
                                 savedCallbackContext.success("Disconnected user");
                             } else {
-                                savedCallbackContext.error(task.getException());
+                                savedCallbackContext.error(task.getException().getMessage());
                             }
                     }
                 });
