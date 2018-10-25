@@ -210,11 +210,11 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
         Intent signInIntent = this.mGoogleSignInClient.getSignInIntent();
         cordova.getActivity().startActivityForResult(signInIntent, RC_GOOGLEPLUS);
     }
-    @Override
+    /*@Override
     protected void onResume() {
         super.onResume();
         trySilentLogin();
-    }
+    }*/
     /**
      * Tries to log the user in silently using existing sign in result information
      */
