@@ -151,7 +151,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
         String webClientId = clientOptions.optString(ARGUMENT_WEB_CLIENT_ID, null);
         //gso.requestServerAuthCode(webClientId, true);
         // request the default scopes
-        gso.requestEmail().requestProfile();
+        gso.requestEmail().requestProfile().requestIdToken(webClientId);
         //gso.requestProfile();
         // We're building the scopes on the Options object instead of the API Client
         // b/c of what was said under the "addScope" method here:
