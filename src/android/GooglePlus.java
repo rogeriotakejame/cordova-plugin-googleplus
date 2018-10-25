@@ -152,7 +152,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
         gso.requestServerAuthCode(webClientId, true);
         // request the default scopes
         //gso.requestEmail().requestProfile();
-
+        gso.requestProfile();
         // We're building the scopes on the Options object instead of the API Client
         // b/c of what was said under the "addScope" method here:
         // https://developers.google.com/android/reference/com/google/android/gms/common/api/GoogleApiClient.Builder.html#public-methods
@@ -210,7 +210,11 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
         Intent signInIntent = this.mGoogleSignInClient.getSignInIntent();
         cordova.getActivity().startActivityForResult(signInIntent, RC_GOOGLEPLUS);
     }
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        trySilentLogin();
+    }
     /**
      * Tries to log the user in silently using existing sign in result information
      */
@@ -260,7 +264,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
             });
         
     }
-
+    
     /**
      * Signs the user out from the client
      */
