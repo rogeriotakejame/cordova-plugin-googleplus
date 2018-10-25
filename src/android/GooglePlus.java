@@ -149,10 +149,10 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
         // Make our SignIn Options builder.
         GoogleSignInOptions.Builder gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN);
         String webClientId = clientOptions.optString(ARGUMENT_WEB_CLIENT_ID, null);
-        gso.requestServerAuthCode(webClientId, true);
+        //gso.requestServerAuthCode(webClientId, true);
         // request the default scopes
-        //gso.requestEmail().requestProfile();
-        gso.requestProfile();
+        gso.requestEmail().requestProfile();
+        //gso.requestProfile();
         // We're building the scopes on the Options object instead of the API Client
         // b/c of what was said under the "addScope" method here:
         // https://developers.google.com/android/reference/com/google/android/gms/common/api/GoogleApiClient.Builder.html#public-methods
