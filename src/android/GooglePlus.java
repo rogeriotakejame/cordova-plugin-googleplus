@@ -236,15 +236,15 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
                             //GoogleSignInAccount signInAccount = task.getResult();
                             JSONObject result = new JSONObject();
                             try{
-                                result.put("email", signInAccount.getEmail());
+                                //result.put("email", signInAccount.getEmail());
                                 result.put("idToken", signInAccount.getIdToken());
                                 //result.put("serverAuthCode", signInAccount.getServerAuthCode());
-                                result.put("userId", signInAccount.getId());
+                                /*result.put("userId", signInAccount.getId());
                                 result.put("displayName", signInAccount.getDisplayName());
                                 result.put("familyName", signInAccount.getFamilyName());
                                 result.put("givenName", signInAccount.getGivenName());
                                 result.put("imageUrl", signInAccount.getPhotoUrl());
-                                result.put("scopes", signInAccount.getGrantedScopes()); 
+                                result.put("scopes", signInAccount.getGrantedScopes()); */
                                 savedCallbackContext.success(result);
                             } catch (Exception e) {
                                 savedCallbackContext.error("Trouble obtaining result, error: " + e.getMessage());
@@ -423,15 +423,15 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
                         result.put(FIELD_ACCESS_TOKEN, accessTokenBundle.get(FIELD_ACCESS_TOKEN));
                         result.put(FIELD_TOKEN_EXPIRES, accessTokenBundle.get(FIELD_TOKEN_EXPIRES));
                         result.put(FIELD_TOKEN_EXPIRES_IN, accessTokenBundle.get(FIELD_TOKEN_EXPIRES_IN));*/
-                        result.put("email", acct.getEmail());
+                        //result.put("email", acct.getEmail());
                         result.put("idToken", acct.getIdToken());
                         //result.put("serverAuthCode", acct.getServerAuthCode());
-                        result.put("userId", acct.getId());
+                        /*result.put("userId", acct.getId());
                         result.put("displayName", acct.getDisplayName());
                         result.put("familyName", acct.getFamilyName());
                         result.put("givenName", acct.getGivenName());
                         result.put("imageUrl", acct.getPhotoUrl());
-                        result.put("scopes", acct.getGrantedScopes()); 
+                        result.put("scopes", acct.getGrantedScopes());*/ 
                         savedCallbackContext.success(result);
                     } catch (Exception e) {
                         savedCallbackContext.error("Trouble obtaining result, error: " + e.getMessage());
