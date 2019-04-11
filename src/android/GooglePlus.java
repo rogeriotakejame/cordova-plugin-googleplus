@@ -408,7 +408,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
         if (!signInResult.isSuccess()) {
             Log.i(TAG, "Wasn't signed in");
             //Return the status code to be handled client side
-            savedCallbackContext.error(signInResult.getStatus().getStatusMessage());
+            savedCallbackContext.error(signInResult.getStatus().getStatusCode());
         } else {
             new AsyncTask<Void, Void, Void>() {
                 @Override
