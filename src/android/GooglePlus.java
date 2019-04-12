@@ -255,7 +255,7 @@ public class GooglePlus extends CordovaPlugin implements GoogleApiClient.OnConne
                     } else {
                         Log.i(TAG, "silentSignIn unsucessful");
                         Exception exception = task.getException();
-                        Log.i(TAG,exception.printStackTrace());
+                        Log.i(TAG,exception.toString());
                         signIn();
                     }
                     /*try {
